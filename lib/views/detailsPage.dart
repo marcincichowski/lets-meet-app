@@ -13,9 +13,16 @@ class DetailsPage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-             Text(user.username),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: const Text("username:"),
+            ),
+            Text(user.username),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: const Text("email:"),
+            ),
              Text(user.email),
-             Text('${user.id}'),
           ],
         ),
       ),

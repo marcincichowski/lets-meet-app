@@ -51,10 +51,10 @@ class _AddMeetingState extends State<AddMeeting> {
                     id: 0,
                     ownerId: widget.activeUser.userId,
                     gameId: widget.game.id,
-                    participantsId: [widget.activeUser.userId],
+                    participantsId: [],
                     name: nameController.text,
-                    addDate: 'add_date',
-                    meetingDate: 'meeting_date')
+                    addDate: DateTime.now().toIso8601String(),
+                    meetingDate: null)
                 ).then((meeting) {
                   if (meeting.id != 0) {
                     ScaffoldMessenger.of(context).showSnackBar(

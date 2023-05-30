@@ -23,12 +23,38 @@ class DetailsGamePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text("Description:"),
+            ),
             Text(game.description),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: const Text("URL:"),
+            ),
             Text(game.url),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: const Text("Update date:"),
+            ),
             Text(game.lastUpdateDate),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: const Text("Accepted date:"),
+            ),
             Text(game.acceptDate),
-            Text(game.isOnline.toString()),
-            Text(game.personCount.toString()),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: const Text("type:"),
+            ),
+            if (game.isOnline)
+              const Text("Online"),
+            if (!game.isOnline)
+              const Text("physical"),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: const Text("number of players:"),
+            ),
             Text(game.personCount.toString()),
           ],
         ),

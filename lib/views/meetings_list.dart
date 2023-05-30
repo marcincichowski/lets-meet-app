@@ -74,7 +74,8 @@ class _MeetingListState extends State<MeetingList> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData){
                     return ListView.separated(
-                      physics: ClampingScrollPhysics(),                      scrollDirection: Axis.vertical,
+                      physics: ClampingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -108,7 +109,7 @@ class _MeetingListState extends State<MeetingList> {
 
   openPage(context, Meeting meeting){
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => DetailsMeetingPage(meeting: meeting)));
+        context, MaterialPageRoute(builder: (context) => DetailsMeetingPage(meeting: meeting, activeUser: widget.activeUser)));
   }
 }
 

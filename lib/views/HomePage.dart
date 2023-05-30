@@ -19,7 +19,6 @@ class HomePage extends StatefulWidget {
 }
 class _HomePageState extends State<HomePage> {
   late Future<List<User>> futureAllUsers;
-
   int currentPageIndex = 0;
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.alwaysHide;
@@ -56,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             switch(index){
               case 0:{
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => UserList(activeUser: widget.activeUser)));
+                    context, MaterialPageRoute(builder: (context) => MeetingList(activeUser: widget.activeUser)));
               }
               case 1:{
                 Navigator.push(
@@ -64,7 +63,7 @@ class _HomePageState extends State<HomePage> {
               }
               case 2:{
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => MeetingList(activeUser: widget.activeUser)));
+                    context, MaterialPageRoute(builder: (context) => UserList(activeUser: widget.activeUser)));
               }
             }
           });
@@ -124,10 +123,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 Center(
                   child: Card(
-                    // clipBehavior is necessary because, without it, the InkWell's animation
-                    // will extend beyond the rounded edges of the [Card] (see https://github.com/flutter/flutter/issues/109776)
-                    // This comes with a small performance cost, and you should not set [clipBehavior]
-                    // unless you need it.
                     clipBehavior: Clip.hardEdge,
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(30),
@@ -150,10 +145,6 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                   child: Card(
-                    // clipBehavior is necessary because, without it, the InkWell's animation
-                    // will extend beyond the rounded edges of the [Card] (see https://github.com/flutter/flutter/issues/109776)
-                    // This comes with a small performance cost, and you should not set [clipBehavior]
-                    // unless you need it.
                     clipBehavior: Clip.hardEdge,
                     child: InkWell(
                       splashColor: Colors.blue.withAlpha(30),

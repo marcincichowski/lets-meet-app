@@ -8,25 +8,54 @@ import '../models/participant_model.dart';
 
 class ParticipantService{
 
-  Future<List<Participant>> fetchParticipants() async {
+  Future<List<Participant>> fetchParticipants({String? id='', String? meetingId=''}) async {
+    print(id);
+
+    var url = 'http://10.0.2.2:8000/backend/participants/$id';
+
+    if (meetingId != '' && id !='') {
+      url = 'http://10.0.2.2:8000/backend/participants/$id/?meeting=$meetingId';
+    }
+    else if (meetingId != '' && id ==''){
+      url = 'http://10.0.2.2:8000/backend/participants/?meeting=$meetingId';
+    }
+
+    print(url);
     final response = await http
-        .get(Uri.parse('http://10.0.2.2:8000/backend/game/all'));
+        .get(Uri.parse(url));
+
 
     if (response.statusCode == 200) {
-      List jsonResponse = json.decode(response.body)['data'];
-      return jsonResponse.map((participant) => Participant.fromJson(participant)).toList();
+      if (id == ''){
+        List jsonResponse = json.decode(response.body);
+        return jsonResponse.map((participant) => Participant.fromJson(participant)).toList();
+
+      }
+      var test = Participant.fromJson(jsonDecode(response.body));
+      return [test];
     } else {
-      throw Exception('Failed to load games');
+      throw Exception('Failed to load participant(s)');
     }
   }
-  Future<Game> fetchGame(int id) async {
-    final response = await http
-        .get(Uri.parse('http://10.0.2.2:8000/backend/meeting/get_id?id=$id'));
+
+  Future<bool> addPreferedDate(int meetingId, int userId, DateTime date) async {
+    final response = await http.patch(
+      Uri.parse('http://10.0.2.2:8000/backend/participants/set_prefered_date/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'prefered_date': '${date.year}-${date.month}-${date.day}',
+        'user_id': userId,
+        'meeting_id': meetingId,
+      }),
+    );
 
     if (response.statusCode == 200) {
-      return Game.fromJson(jsonDecode(response.body));
+      return true;
     } else {
-      throw Exception('Failed to load game');
+      throw Exception('Failed to add prefered date to Meeting.');
     }
   }
+
 }

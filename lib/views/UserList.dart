@@ -51,7 +51,6 @@ class _UserListState extends State<UserList> {
                     margin: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                     child: TextField(
                       onChanged: (query) async {
-                        print(query);
 
                         var users = await futurePermamentAllUsers;
                         users = users.where((user) {

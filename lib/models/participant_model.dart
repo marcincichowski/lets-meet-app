@@ -3,7 +3,7 @@ class Participant {
   int id;
   int userId;
   int meetingId;
-  String preferedDate;
+  dynamic preferedDate;
 
   Participant({
     required this.id,

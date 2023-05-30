@@ -9,6 +9,7 @@ import '../models/user_model.dart';
 import '../services/game_service.dart';
 import '../services/meeting_service.dart';
 import '../services/user_service.dart';
+import 'add_game.dart';
 import 'add_user.dart';
 import 'detailsPage.dart';
 import 'details_game_page.dart';
@@ -38,9 +39,8 @@ class _GameListState extends State<GameList> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () => print('go')
-          //Navigator.push(
-          //    context, MaterialPageRoute(builder: (context) => AddMeeting(activeUser: widget.activeUser)))
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AddGame(activeUser: widget.activeUser)))
       ),
       appBar: AppBar(title:  const Text("Games")),
       body: RefreshIndicator(
@@ -57,8 +57,6 @@ class _GameListState extends State<GameList> {
                 margin: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                 child: TextField(
                   onChanged: (query) async {
-                    print(query);
-
                     var games = await futurePermamentAllGames;
                     games = games.where((game) {
                       return game.name.toLowerCase().contains(query.toLowerCase());

@@ -32,4 +32,5 @@ class User {
       isSuperUser: json['is_superuser'],
     );
   }
+
 }

@@ -37,12 +37,9 @@ class _LoginState extends State<Login> {
     }
 
     return MaterialApp(
-      title: 'Materialapp demo',
+      title: "Lets Meet app",
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-        //appBar: AppBar(
-          //title: const Text('Material'),
-        //),
           body: Container(
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -109,15 +106,12 @@ class _LoginState extends State<Login> {
                             foregroundColor: MaterialStatePropertyAll<Color>(Colors.blue),
                           ),
                           onPressed:  () => {
-                            //auth = UserService().authUser(usernameController.text, passwordController.text).then((value) => value.userId),
                             auth = UserService().authUser(usernameController.text, passwordController.text).then((authorization) {
-                              print(authorization);
                               if ( authorization.userId != 0) {
                                 Navigator.push(
                                     context, MaterialPageRoute(builder: (context) => HomePage(activeUser: authorization)));
                               }
                             }),
-                            //helper(usernameController.text, passwordController.text, ),
 
                           },
                           child: const Text("Login"),
@@ -139,7 +133,6 @@ class _LoginState extends State<Login> {
 
   helper(String username, String password, Authorization activeUser) {
     UserService().authUser(username, password).then((result) {
-      print(result);
       setState(() {
         activeUser = result;
       });

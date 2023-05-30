@@ -6,10 +6,8 @@ import '../models/user_model.dart';
 class UserService{
 
   Future<List<User>> fetchUsers([String? id='']) async {
-    print(id);
     var url = 'http://10.0.2.2:8000/backend/users/$id';
 
-    print(url);
     final response = await http
         .get(Uri.parse(url));
 
@@ -22,11 +20,7 @@ class UserService{
       }
       var test = User.fromJson(jsonDecode(response.body));
       return [test];
-      //var test = User.fromJson(jsonDecode(response.body));
-      //return test;
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
       throw Exception('Failed to load users');
     }
   }
@@ -42,17 +36,12 @@ class UserService{
         'first_name': user.firstName,
         'last_name': user.lastName,
         'email': user.email,
-        //'password': user.password,
       }),
     );
 
     if (response.statusCode == 201) {
-      // If the server did return a 201 CREATED response,
-      // then parse the JSON.
       return User.fromJson(jsonDecode(response.body));
     } else {
-      // If the server did not return a 201 CREATED response,
-      // then throw an exception.
       throw Exception('Failed to create user.');
     }
   }
@@ -71,12 +60,9 @@ class UserService{
     );
 
     if (response.statusCode == 200) {
-      // If the server did return a 201 CREATED response,
-      // then parse the JSON.
+
       return Authorization.fromJson(jsonDecode(response.body));
     } else {
-      // If the server did not return a 201 CREATED response,
-      // then throw an exception.
       throw Exception('Failed to authorize user.');
     }
   }

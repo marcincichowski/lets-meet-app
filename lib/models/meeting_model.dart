@@ -1,9 +1,10 @@
 
+import 'package:untitled/models/user_model.dart';
+
 class Meeting {
   int id;
   int ownerId;
   int gameId;
-  // ToDo: Add method to catch all participants of given meeting
   List<dynamic> participantsId;
   String name;
   dynamic addDate;
